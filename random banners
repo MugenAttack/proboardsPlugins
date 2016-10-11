@@ -1,0 +1,24 @@
+$(document).ready(function(){
+   	var userTheme = pb.data('user').theme_id;//user theme
+    var themes = pb.plugin.get('random_banners_2').settings.theme;
+    var themeSelected;
+    
+    for (var i = 0;i<themes.length;i++)
+    {
+        if (themes[i].theme_id == userTheme)
+            themeSelected = i;
+    }
+    
+    var bannerList = themes[themeSelected].whitelist.split(",");
+    var banners = pb.plugin.get('random_banners_2').settings.banners;
+    var select = Math.floor(Math.random() * (bannerList.length));
+    var url;
+
+    for (var i = 0; i < banners.length;i++)
+    {
+        if (banners[i].banner_tag == bannerList[select])
+            url = banners[i].url;
+    }
+   
+    $('#logo').children('img').attr('src',  url);
+});
